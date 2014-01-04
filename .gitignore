@@ -1,0 +1,4 @@
+.vagrant/
+.bundle/
+vendor/
+Gemfile.lock
