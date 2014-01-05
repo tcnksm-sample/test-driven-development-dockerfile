@@ -1,12 +1,36 @@
-# Test Dockerfile by Serverspec
+# Test Dockerfile by RSpec with Serverspec on OSX
 
-Sample project TDD for Dockerfile with [serverspec](https://github.com/serverspec/serverspec)
+Sample project Test Driven development for Dockerfile with [serverspec](https://github.com/serverspec/serverspec)
+
+- Write test by RSpec
+- Run test -> `RED`
+- Edit Dockerfile and build image
+- Run test -> `GREEN`
 
 ## Usage
 
+```
+$ ./build_and_test.sh
+```
 
+This script executes belows,
 
-## serverspec
+1. Build image, `docker build -t serverspec /vagrant/.`
+1. Run container, `docker run -p 7654:22 -d serverspec /usr/sbin/sshd -D`
+1. Run rspec test, `bundle exec rspec`
+1. Delete container, `docker stop` and `docker rm`
+
+## Set up
+
+### ssh
+
+To use serverspec, we need ssh connection. To connect from OSX, use portforwarding. See Vagrantfile and Dockerfile
+
+### sudo
+
+To use serverspec, we need sudo setting. See Dockerfile
+
+### serverspec
 
 Init
 
@@ -45,41 +69,16 @@ Host 192.168.50.4
   LogLevel FATAL
 ```
 
-Set environmental variable
+Set environmental variable for sudo, 
 
 ```
 export SUDO_PASSWORD="pass"
 ```
 
-## ssh
-
-#### ssh from vagrant VM
+or
 
 ```
-# Dockerfile
-# ssh login from vagrant without no password
-RUN useradd vagrant
-RUN mkdir -p /home/vagrant/.ssh
-RUN chown vagrant /home/vagrant/.ssh
-RUN chmod 700 /home/vagrant/.ssh
-
-# ADD /home/vagrant/.ssh/id_rsa.pub /home/vagrant/.ssh/authorized_keys
-# -> Not found
-ADD ./id_rsa.pub /home/vagrant/.ssh/authorized_keys
-RUN chown vagrant /home/vagrant/.ssh/authorized_keys
-RUN chmod 700 /home/vagrant/.ssh/authorized_keys
-```
-
-Run container with portforward setting, 0.0.0.0:7654->22/tcp
-
-```
-docker run -p 7654:22 -d serverspec /usr/sbin/
-```
-
-Login with ssh
-
-```
-ssh vagrant@localhost -p 7654
+export ASK_SUDO_PASSWORD=1
 ```
 
 ## Reference
@@ -88,3 +87,4 @@ ssh vagrant@localhost -p 7654
 - [Experimenting with test driven development for docker](http://blog.wercker.com/2013/12/23/Test-driven-development-for-docker.html)
 - [serverspecでサーバ環境のテストを書いてみよう](http://www.slideshare.net/ikedai/serverspec)
 - [Docker (土曜日に podcast します) - naoyaのはてなダイアリー](http://d.hatena.ne.jp/naoya/20130620/1371729625)
+- [Dockerで立てたコンテナにsshで接続する - $shibayu36->blog;](http://shibayu36.hatenablog.com/entry/2013/12/07/233510)
