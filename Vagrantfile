@@ -7,6 +7,6 @@ Vagrant.configure("2") do |config|
   config.vm.network :forwarded_port, guest: 7654, host: 7654
   config.vm.network :private_network, ip: "192.168.50.4"
   config.vm.provision :docker do |d|
-    d.pull_images "ubuntu"
+    d.pull_images "base"
   end
 end
