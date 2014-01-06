@@ -1,7 +1,12 @@
 require 'serverspec'
 require 'pathname'
 require 'net/ssh'
+require 'docker'
 
+# For docker-api
+Docker.url = "http://192.168.50.4:5422"
+
+# For serverspec
 include SpecInfra::Helper::Ssh
 include SpecInfra::Helper::DetectOS
 

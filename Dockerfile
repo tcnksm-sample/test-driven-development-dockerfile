@@ -25,6 +25,7 @@ RUN echo "taichi   ALL=(ALL)   ALL" > /etc/sudoers.d/taichi
 # test package install 
 RUN apt-get -y install git
 
+EXPOSE 22
 # ssh login from vagrant without no password
 # RUN useradd vagrant
 # RUN mkdir -p /home/vagrant/.ssh
@@ -39,5 +40,3 @@ RUN apt-get -y install git
 # sudo
 # RUN echo vagrant:vagrant | chpasswd
 # RUN echo "vagrant   ALL=(ALL)   ALL" > /etc/sudoers.d/vagrant
-
-
