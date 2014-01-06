@@ -1,11 +1,16 @@
-# Test Dockerfile by RSpec with Serverspec on OSX
+# Sample project for testing Dockerfile by RSpec with Serverspec on OSX
 
-Sample project Test Driven development for Dockerfile with [serverspec](https://github.com/serverspec/serverspec)
+This is sample project for Test Driven development for Dockerfile with [serverspec](https://github.com/serverspec/serverspec)
 
 - Write test by RSpec
 - Run test -> `RED`
 - Edit Dockerfile and build image
 - Run test -> `GREEN`
+
+## How to test
+
+- For checking package installion, use serverspec
+- For checking Dockerfile specific command, use docker-api
 
 ## Usage
 
@@ -80,6 +85,13 @@ or
 ```
 export ASK_SUDO_PASSWORD=1
 ```
+
+### Docker-api
+
+[swipely/docker-api](https://github.com/swipely/docker-api)
+
+To use remote API, need to change bind address, see `docker.conf`
+
 
 ## Reference
 
