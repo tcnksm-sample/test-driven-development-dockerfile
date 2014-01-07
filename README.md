@@ -1,6 +1,6 @@
-# Sample TDD Dockerfile by RSpec
+# Sample TDD of Dockerfile by RSpec
 
-This is sample project for Test Driven Development (TDD) for Dockerfile by RSpec. This means belows cycle,
+This is sample project for Test Driven Development (TDD) of Dockerfile by RSpec. This means developing dockerfile by below cycle, 
 
 - Write Rspec test
 - Build Docker image and run test -> `RED`
@@ -8,16 +8,16 @@ This is sample project for Test Driven Development (TDD) for Dockerfile by RSpec
 - Build Docker image and run test -> `GREEN`
 - ...
 
-In Dockerfile we should test pakage installation and dockerfile specific command like `CMD` or `EXPOSE`. To do this I use belows,
+When developing Dockerfile, docker image, we should test pakage installation and dockerfile specific command like `CMD` or `EXPOSE`. To do this I use belows,
 
 - To test package installation, [serverspec](https://github.com/serverspec/serverspec)
-- To test docker specific command, [docker-api](https://github.com/swipely/docker-api) which is [Docker Remote API]() wrapper. 
+- To test docker specific command, [docker-api](https://github.com/swipely/docker-api) which is [Docker Remote API]() wrapper.
 
 
-## How to test
+## Environment
 
-- For checking package installion, use serverspec
-- For checking Dockerfile specific command, use docker-api
+- OSX
+- Docker on Vagrant VM
 
 ## Usage
 
@@ -27,24 +27,26 @@ $ ./build_and_test.sh
 
 This script executes belows,
 
-1. Build image, `docker build -t serverspec /vagrant/.`
-1. Run container, `docker run -p 7654:22 -d serverspec /usr/sbin/sshd -D`
+1. Build image, `docker -H :5422 build -t tcnksm/sample /vagrant/.`
+1. Run container, `docker -H :5422 run -p 7654:22 -d serverspec /usr/sbin/sshd -D`
 1. Run rspec test, `bundle exec rspec`
 1. Delete container, `docker stop` and `docker rm`
 
-## Set up
+## serverspec
 
-### ssh
+### settings (ssh, sudoer)
 
-To use serverspec, we need ssh connection. To connect from OSX, use portforwarding. See Vagrantfile and Dockerfile
-
-### sudo
-
-To use serverspec, we need sudo setting. See Dockerfile
+To use serverspec, we need to prepare docker image which is prepared ssh and sudo user, see `Dockerfile`. In `Dockerfile`, to login the docker container by ssh without password, use public key on your localhost, prepare `id_rsa.pub` in project directory.
 
 ### serverspec
 
-Init
+To install,
+
+```
+$ gem install serverspec
+```
+
+Initialize, 
 
 ```
 $ bundle serverspec-init
@@ -63,10 +65,12 @@ Select a backend type:
 Select number: 1
 
 Vagrant instance y/n: n
-Input target host name: 192.168.50.4 # <- Use vagrant private network ip
+Input target host name: 192.168.50.4
 ```
 
-Edit `~/.ssh/config`
+In `Vagrantfile`, private network IP "192.168.50.4" is assined to Vagrant VM. You should use it for target host name.
+
+Edit `~/.ssh/config`, using vagrant private network IP. 
 
 ```
 Host 192.168.50.4
@@ -93,7 +97,7 @@ or
 export ASK_SUDO_PASSWORD=1
 ```
 
-### Docker-api
+## Docker Remote API
 
 [swipely/docker-api](https://github.com/swipely/docker-api)
 
