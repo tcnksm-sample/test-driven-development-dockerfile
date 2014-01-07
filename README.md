@@ -32,6 +32,15 @@ This script executes belows,
 1. Run rspec test, `bundle exec rspec`
 1. Delete container, `docker stop` and `docker rm`
 
+
+## Vagrant
+
+Assgin private network IP to Vagrant VM. And out ssh configuration in advance,
+
+```
+vagrant ssh-config --host docker-vm >> ~/.ssh/config
+```
+
 ## serverspec
 
 ### settings (ssh, sudoer)
