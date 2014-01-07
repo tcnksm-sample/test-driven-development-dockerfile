@@ -12,6 +12,7 @@ RUN apt-get install -y openssh-server
 # Setting ssh
 RUN mkdir /var/run/sshd
 RUN /usr/sbin/sshd
+EXPOSE 22
 
 # Creating user and setting its password
 RUN useradd taichi
@@ -34,4 +35,4 @@ RUN echo "taichi   ALL=(ALL)   ALL" > /etc/sudoers.d/taichi
 
 # e.g. 
 RUN apt-get -y install git
-
+RUN apt-get -y install nginx
