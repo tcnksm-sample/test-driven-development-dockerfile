@@ -97,17 +97,40 @@ or
 export ASK_SUDO_PASSWORD=1
 ```
 
+### Writing Rspec test
+
+See sample `spec/192.168.50.4/dockerfile_git_spec.rb`. For more details, see [documents](http://serverspec.org/)
+
+
 ## Docker Remote API
 
-[swipely/docker-api](https://github.com/swipely/docker-api)
+### Settings
 
-To use remote API, need to change bind address, see `docker.conf`
+By default, docker deamon listen on unix:///var/run/docker.sock. (see [here](http://docs.docker.io/en/latest/use/basics/#bind-docker)), To use it from external host, you should bind specific IP and port. To do this edit `/etc/init/docker.conf`. See `docker.conf`
+
+### Docker Remote API
+
+Install, 
+
+```
+$ gem install docker-api
+```
+
+Add below to `spec_helper.rb`
+
+```
+require "docker"
+Docker.url = "http://192.168.50.4:5422"
+```
+
+IP is private IP assined Vagrant VM, port is bind port of docker deamon set by `docker.conf`
+
+### Writing Rspec test
+
+See sample `spec/192.168.50.4/dockerfile_spec.rb`. For more details, see [this blog post](http://blog.wercker.com/2013/12/23/Test-driven-development-for-docker.html). 
 
 
 ## Reference
 
 - [serverspec - home](http://serverspec.org/)
 - [Experimenting with test driven development for docker](http://blog.wercker.com/2013/12/23/Test-driven-development-for-docker.html)
-- [serverspecでサーバ環境のテストを書いてみよう](http://www.slideshare.net/ikedai/serverspec)
-- [Docker (土曜日に podcast します) - naoyaのはてなダイアリー](http://d.hatena.ne.jp/naoya/20130620/1371729625)
-- [Dockerで立てたコンテナにsshで接続する - $shibayu36->blog;](http://shibayu36.hatenablog.com/entry/2013/12/07/233510)
