@@ -1,11 +1,18 @@
-# Sample project for testing Dockerfile by RSpec with Serverspec on OSX
+# Sample TDD Dockerfile by RSpec
 
-This is sample project for Test Driven development for Dockerfile with [serverspec](https://github.com/serverspec/serverspec)
+This is sample project for Test Driven Development (TDD) for Dockerfile by RSpec. This means belows cycle,
 
-- Write test by RSpec
-- Run test -> `RED`
-- Edit Dockerfile and build image
-- Run test -> `GREEN`
+- Write Rspec test
+- Build Docker image and run test -> `RED`
+- Edit Dockerfile
+- Build Docker image and run test -> `GREEN`
+- ...
+
+In Dockerfile we should test pakage installation and dockerfile specific command like `CMD` or `EXPOSE`. To do this I use belows,
+
+- To test package installation, [serverspec](https://github.com/serverspec/serverspec)
+- To test docker specific command, [docker-api](https://github.com/swipely/docker-api) which is [Docker Remote API]() wrapper. 
+
 
 ## How to test
 

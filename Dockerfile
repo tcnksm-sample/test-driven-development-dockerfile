@@ -29,10 +29,15 @@ RUN chmod 600 /home/taichi/.ssh/authorized_keys
 # Setting sudoer
 RUN echo "taichi   ALL=(ALL)   ALL" > /etc/sudoers.d/taichi
 
+
 # --------------------------------------------
 # Build your own image
 # --------------------------------------------
 
-# e.g. 
+# e.g., package installation tested by serverspec
 RUN apt-get -y install git
-RUN apt-get -y install nginx
+
+# e.g., docker specific command tested by docker remote api
+WORKDIR /home/taichi
+ENV TEST test
+CMD ["sshd"]
