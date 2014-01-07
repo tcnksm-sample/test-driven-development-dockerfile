@@ -37,15 +37,21 @@ This script executes belows,
 
 ## Vagrant
 
-Assgin private network IP to Vagrant VM. And out ssh configuration in advance,
+In advance, run Vagrant VM
 
 ```
-vagrant ssh-config --host docker-vm >> ~/.ssh/config
+$ vagrant up
+```
+
+Assgin private network IP to Vagrant VM. And out ssh configuration,
+
+```
+$ vagrant ssh-config --host docker-vm >> ~/.ssh/config
 ```
 
 ## serverspec
 
-### settings (ssh, sudoer)
+### Settings (ssh, sudoer)
 
 To use serverspec, we need to prepare docker image which is prepared ssh and sudo user, see `Dockerfile`. In `Dockerfile`, to login the docker container by ssh without password, use public key on your localhost, prepare `id_rsa.pub` in project directory.
 
