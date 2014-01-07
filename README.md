@@ -8,7 +8,7 @@ This is sample project for Test Driven Development (TDD) of Dockerfile by RSpec.
 - Build Docker image and run test -> `RED`
 - Edit Dockerfile
 - Build Docker image and run test -> `GREEN`
-- ...
+- Write Rs...
 
 When developing Dockerfile, docker image, we should test pakage installation and dockerfile specific command like `CMD` or `EXPOSE`. To do this I use belows,
 
