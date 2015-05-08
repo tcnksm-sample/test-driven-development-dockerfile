@@ -1,4 +1,4 @@
-## Test Driven Development of Dockerfile by RSpec
+# Test Driven Development of Dockerfile by RSpec
 
 This is sample project for Test Driven Development (TDD) of Dockerfile by RSpec. This means developing dockerfile by below cycle, 
 
