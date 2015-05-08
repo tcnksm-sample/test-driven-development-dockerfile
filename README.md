@@ -1,7 +1,5 @@
 # Sample TDD of Dockerfile by RSpec
 
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/tcnksm/docker-rspec/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
 This is sample project for Test Driven Development (TDD) of Dockerfile by RSpec. This means developing dockerfile by below cycle, 
 
 - Write Rspec test
